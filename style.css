@@ -1,0 +1,684 @@
+/* ------------------------------------------------------------------
+   Site — feuille de style
+   Structure : barre de navigation en haut, un film en tête de page,
+   puis les films, les textes, la bio et le parcours, puis le pied de page.
+   Fond noir, composition en noir et blanc.
+
+   Typographie, à partir des polices fournies :
+     titres et repères — Lucida Sans (Normal, Demi-gras, Italique)
+     textes courants   — Minion Pro
+     chiffres et durées — Lucida Sans Typewriter
+   Les fichiers sont dans /fonts, convertis en woff2.
+
+   Pour changer les couleurs ou les tailles, modifiez les variables
+   plus bas : elles pilotent toute la page.
+------------------------------------------------------------------- */
+
+@font-face {
+  font-family: "Lucida Sans";
+  src: url("../fonts/lucida-sans-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Lucida Sans";
+  src: url("../fonts/lucida-sans-demi.woff2") format("woff2");
+  font-weight: 600 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Lucida Sans";
+  src: url("../fonts/lucida-sans-italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Lucida Sans Typewriter";
+  src: url("../fonts/lucida-typewriter.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Minion Pro";
+  src: url("../fonts/minion-pro-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* Couleurs */
+  --ink:        #000000;
+  --ink-raise:  #121212;
+  --bone:       #F2F0EC;
+  --bone-dim:   #8A8A86;
+  --line:       rgba(242, 240, 236, 0.16);
+  --line-firm:  rgba(242, 240, 236, 0.34);
+
+  /* Typographie */
+  --font-display: "Lucida Sans", "Lucida Grande", "Segoe UI", sans-serif;
+  --font-body:    "Minion Pro", Georgia, "Times New Roman", serif;
+  --font-mono:    "Lucida Sans Typewriter", "Lucida Console", ui-monospace, monospace;
+
+  /* Échelle de tailles — Minion Pro a un petit œil, le corps est relevé */
+  --fs-xs:      0.8125rem;
+  --fs-sm:      0.9375rem;
+  --fs-base:    1.1875rem;
+  --fs-md:      1.1875rem;
+  --fs-lg:      1.375rem;
+  --fs-lede:    clamp(1.4rem, 2.8vw, 2rem);
+  /* Taille commune à tous les repères en capitales : nom en haut,
+     menu, titres de section, titre du film en tête. Une seule valeur
+     à changer pour les ajuster tous ensemble. */
+  --fs-label:   0.75rem;
+  --fs-name:    var(--fs-label);
+
+  /* Rythme */
+  --gutter:     clamp(1rem, 4vw, 3.5rem);
+  --stack:      clamp(3.5rem, 7vw, 6rem);
+
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--bone);
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  font-weight: 400;
+  line-height: 1.55;
+  padding-inline: var(--gutter);
+  padding-block: 0 clamp(3rem, 6vw, 5rem);
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+::selection { background: var(--bone); color: var(--ink); }
+
+:focus-visible {
+  outline: 2px solid var(--bone);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+.skip {
+  position: absolute;
+  left: -9999px;
+  background: var(--bone);
+  color: var(--ink);
+  padding: 0.6rem 1rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-decoration: none;
+}
+.skip:focus { left: var(--gutter); top: 1rem; z-index: 60; }
+
+/* --------------------------------------------------- Bandeau ----- */
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem 2rem;
+  background: var(--ink);
+  padding-block: clamp(1rem, 2.5vw, 1.6rem);
+  margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.topbar__name {
+  font-family: var(--font-display);
+  font-size: var(--fs-name);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  line-height: 1;
+}
+
+.nav { display: flex; flex-wrap: wrap; gap: 1.25rem; }
+.nav a {
+  font-family: var(--font-display);
+  font-size: var(--fs-label);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  color: var(--bone-dim);
+  padding-bottom: 2px;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+.nav a:hover, .nav a[aria-current="true"] { color: var(--bone); border-bottom-color: var(--bone); }
+
+/* ------------------------------------------------------ Flux ----- */
+
+main { display: block; }
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  min-width: 0;
+  scroll-margin-top: 5.5rem;
+  margin-bottom: var(--stack);
+}
+
+.section__head { display: flex; align-items: center; gap: 1rem; }
+
+/* Titre retiré de la vue mais conservé pour les lecteurs d'écran. */
+.section__head--masque {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Le double d'air entre la barre du haut et la première rangée de films */
+#films { padding-top: clamp(7.5rem, 20vw, 12.5rem); }
+
+.section__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-label);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin: 0;
+  flex: none;
+}
+
+.lede {
+  font-family: var(--font-body);
+  font-size: var(--fs-lede);
+  font-weight: 400;
+  line-height: 1.2;
+  margin: 0;
+  max-width: 26ch;
+  text-wrap: balance;
+}
+
+.prose { margin: 0; max-width: 62ch; }
+.prose p { margin: 0 0 1em; }
+.prose p:last-child { margin-bottom: 0; }
+
+.bio__body { display: grid; gap: 2rem; align-items: start; }
+@media (min-width: 52rem) {
+  .bio__body { grid-template-columns: minmax(0, 1fr) minmax(12rem, 20rem); }
+}
+/* Sans portrait : une seule colonne, le texte prend toute la largeur. */
+.bio__body--plein { grid-template-columns: minmax(0, 1fr); }
+.bio__body--plein .prose { max-width: none; }
+.portrait { margin: 0; aspect-ratio: 3 / 2; overflow: hidden; background: var(--ink-raise); max-width: 100%; }
+.portrait img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ----------------------------------------------------- Films ----- */
+
+/* Deux films par ligne à toutes les largeurs. Sur grand écran la grille
+   est bridée en largeur pour que les vignettes restent petites. */
+/* Deux films par ligne. La grille est centrée et bridée en largeur :
+   les vignettes restent grandes sans jamais toucher les bords, et les
+   rangées respirent plus que les colonnes. */
+.films {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 13.7%;   /* proportions relevées sur la référence : */
+  row-gap: 15%;        /* vignette 43,1 % de la grille, écart 13,7 % */
+  margin-block: 0;
+  margin-inline: auto;
+  padding: 0;
+  list-style: none;
+}
+@media (min-width: 60rem) {
+  /* La grille occupe 57 % de la largeur de la page et reste centrée. */
+  .films { max-width: 57vw; }
+}
+
+.film { margin: 0; min-width: 0; }
+
+.film__btn {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--ink-raise);
+  max-width: 100%;
+  display: grid;
+  place-content: center;
+  gap: 0.35rem;
+  padding: 1rem;
+}
+.frame img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.3, 1), opacity 0.3s;
+}
+.film__btn:hover .frame img,
+.film__btn:focus-visible .frame img { transform: scale(1.03); opacity: 0.75; }
+
+/* Affiche de repli quand la vignette ne charge pas */
+.frame--poster { background: var(--ink-raise); }
+.poster__titre {
+  font-family: var(--font-display);
+  font-size: var(--fs-label);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  text-align: center;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+.poster__duree {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--bone-dim);
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Pastille de lecture */
+.frame__play {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 3.25rem;
+  height: 3.25rem;
+  margin: -1.625rem 0 0 -1.625rem;
+  border: 1px solid var(--line-firm);
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+  transition: background 0.25s, border-color 0.25s;
+}
+.frame__play::before {
+  content: "";
+  position: absolute;
+  left: 54%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-style: solid;
+  border-width: 0.45rem 0 0.45rem 0.75rem;
+  border-color: transparent transparent transparent var(--bone);
+  transition: border-left-color 0.25s;
+}
+.film__btn:hover .frame__play,
+.film__btn:focus-visible .frame__play { background: var(--bone); border-color: var(--bone); }
+.film__btn:hover .frame__play::before,
+.film__btn:focus-visible .frame__play::before { border-left-color: var(--ink); }
+
+/* Légende centrée sous la vignette, à 4 % de sa largeur, comme la référence */
+.film__caption {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding-top: 4%;
+  text-align: center;
+}
+/* Même taille et même espacement que le titre du film en tête de page */
+.film__titre {
+  font-family: var(--font-display);
+  font-size: var(--fs-label);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  line-height: 1.2;
+}
+.film__meta {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--bone-dim);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------------------------------------------------- Textes ---- */
+
+.textes { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; }
+
+.texte { margin: 0; min-width: 0; }
+
+.texte__ligne {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.35rem 1.5rem;
+  padding-block: 1.1rem;
+  border-top: 1px solid var(--line);
+  color: inherit;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.texte:last-child .texte__ligne { border-bottom: 1px solid var(--line); }
+a.texte__ligne:hover { opacity: 0.6; }
+
+.texte__gauche { display: flex; flex-direction: column; gap: 0.15rem; min-width: 0; }
+
+/* Même taille et même espacement que les titres de films */
+.texte__titre {
+  font-family: var(--font-display);
+  font-size: var(--fs-label);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  line-height: 1.2;
+}
+.texte__precision { font-size: var(--fs-sm); color: var(--bone-dim); }
+
+.texte__annee {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  color: var(--bone-dim);
+  font-variant-numeric: tabular-nums;
+  flex: none;
+}
+
+/* --------------------------------------------------- Parcours ---- */
+
+.cv { display: flex; flex-direction: column; gap: 2.75rem; margin-top: 1rem; }
+
+.cv__groupe { display: flex; flex-direction: column; gap: 0.6rem; }
+
+.cv__titre {
+  font-family: var(--font-display);
+  font-size: var(--fs-label);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--bone);
+  margin: 0;
+}
+
+.timeline { display: flex; flex-direction: column; }
+
+.entry {
+  display: grid;
+  grid-template-columns: 6rem minmax(0, 1fr);
+  gap: 0 1.25rem;
+  padding-block: 1.1rem;
+  border-top: 1px solid var(--line);
+}
+.entry:last-child { border-bottom: 1px solid var(--line); }
+
+.entry__year {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  color: var(--bone-dim);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.7;
+}
+.entry__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+}
+.entry__where { color: var(--bone-dim); font-size: var(--fs-sm); margin: 0.15rem 0 0; }
+.entry a { color: var(--bone); text-decoration-color: var(--line-firm); text-underline-offset: 0.2em; }
+.entry a:hover { text-decoration-color: var(--bone); }
+.entry__detail { font-size: var(--fs-sm); margin: 0.4rem 0 0; max-width: 60ch; }
+
+.entry__points {
+  margin: 0.55rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: var(--fs-sm);
+  max-width: 60ch;
+}
+.entry__points li { display: flex; gap: 0.65rem; }
+.entry__points li::before { content: "—"; color: var(--bone-dim); flex: none; }
+
+@media (max-width: 34rem) {
+  .entry { grid-template-columns: 1fr; gap: 0.3rem; }
+}
+
+.skills { display: flex; flex-direction: column; }
+
+/* Bloc repliable : fermé au chargement, ouvert au clic */
+.skills__bouton {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  cursor: pointer;
+  list-style: none;
+  padding-block: 0.3rem;
+  transition: color 0.2s;
+}
+.skills__bouton::-webkit-details-marker { display: none; }
+.skills__bouton::after {
+  content: "";
+  width: 0.5rem;
+  height: 0.5rem;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform 0.2s;
+}
+.skills__repli[open] .skills__bouton::after { transform: translateY(1px) rotate(-135deg); }
+.skills__bouton:hover { color: var(--bone-dim); }
+
+.skills__repli .skills__list { margin-top: 0.6rem; }
+
+.skills__list {
+  display: grid;
+  grid-template-columns: 6rem minmax(0, 1fr);
+  gap: 0 1.25rem;
+  margin: 0;
+  font-size: var(--fs-sm);
+}
+.skills__list dt {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--bone-dim);
+  padding-block: 0.5rem;
+  border-top: 1px solid var(--line);
+}
+.skills__list dd {
+  margin: 0;
+  padding-block: 0.45rem;
+  border-top: 1px solid var(--line);
+  min-width: 0;
+}
+@media (max-width: 34rem) {
+  .skills__list { grid-template-columns: 1fr; gap: 0; }
+  .skills__list dd { border-top: 0; padding-top: 0; padding-bottom: 0.6rem; }
+}
+
+/* ------------------------------------------------- Pied de page -- */
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem 2.5rem;
+  padding-top: 2.5rem;
+  scroll-margin-top: 5.5rem;
+}
+
+/* Pied de page : tout est à la taille et à l'espacement du menu du haut. */
+.footer__nom {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--fs-label);
+  letter-spacing: 0.06em;
+  color: var(--bone-dim);
+  min-width: 0;
+}
+.footer__lieu::before { content: " · "; }
+
+.footer__mail { margin: 0; min-width: 0; }
+.footer__mail a {
+  font-family: var(--font-display);
+  font-size: var(--fs-label);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  border-bottom: 1px solid var(--bone);
+  padding-bottom: 2px;
+  overflow-wrap: anywhere;
+  transition: opacity 0.2s;
+}
+.footer__mail a:hover { opacity: 0.6; }
+
+.social { display: flex; flex-wrap: wrap; gap: 1.25rem; }
+.social a {
+  font-family: var(--font-display);
+  font-size: var(--fs-label);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--bone-dim);
+  text-decoration: none;
+  padding-bottom: 2px;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+.social a:hover { color: var(--bone); border-bottom-color: var(--bone); }
+
+/* --------------------------------------------------- Lecteur ----- */
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgba(0, 0, 0, 0.97);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding: clamp(0.75rem, 3vw, 2rem);
+  gap: 1rem;
+}
+.lightbox[hidden] { display: none !important; }
+
+.lightbox__bar { display: flex; justify-content: flex-end; }
+
+.lightbox__close,
+.lightbox__step {
+  font-family: var(--font-display);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: transparent;
+  color: var(--bone);
+  border: 1px solid var(--line-firm);
+  padding: 0.5rem 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.lightbox__close:hover,
+.lightbox__step:hover { background: var(--bone); color: var(--ink); border-color: var(--bone); }
+
+.lightbox__stage { display: grid; place-items: center; min-height: 0; }
+
+.player {
+  position: relative;
+  width: min(100%, 68rem);
+  max-height: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  overflow: hidden;
+}
+.player iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.player--lien img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.4; }
+.player__lien {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-display);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  background: var(--bone);
+  color: var(--ink);
+  text-decoration: none;
+  padding: 0.7rem 1.4rem;
+  white-space: nowrap;
+}
+
+.lightbox__foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
+}
+/* Le texte peut être long : il défile dans son coin plutôt que de
+   pousser le lecteur vidéo hors de l'écran. */
+.lightbox__caption {
+  min-width: 0;
+  max-width: 54ch;
+  max-height: 32vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.lightbox__caption h3 {
+  font-family: var(--font-display);
+  font-size: var(--fs-md);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin: 0;
+}
+.lightbox__caption p { margin: 0 0 0.6em; font-size: var(--fs-sm); color: var(--bone-dim); }
+.lightbox__caption p:last-child { margin-bottom: 0; }
+.lightbox__caption a { color: var(--bone); text-decoration-color: var(--line-firm); text-underline-offset: 0.2em; }
+.lightbox__caption a:hover { text-decoration-color: var(--bone); }
+
+.lightbox__credits { margin-top: 0.35rem; }
+.lightbox__credits p { font-size: var(--fs-xs); line-height: 1.6; }
+.lightbox__nav { display: flex; gap: 0.5rem; flex: none; }
+
+/* ----------------------------------------------------- Divers ---- */
+
+.loading { color: var(--bone-dim); font-size: var(--fs-sm); list-style: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

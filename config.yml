@@ -1,0 +1,147 @@
+# ------------------------------------------------------------------
+# Configuration de l'interface d'administration (Sveltia CMS).
+#
+# À FAIRE AVANT LA MISE EN LIGNE :
+#   remplacez VOTRE-COMPTE/VOTRE-DEPOT par le nom de votre dépôt GitHub,
+#   par exemple  iolande/site
+#
+# Tout ce qui est décrit ici devient un champ éditable sur /admin.
+# Pour ajouter un champ, ajoutez une ligne dans "fields" puis utilisez
+# la même clé dans les fichiers content/*.json.
+# ------------------------------------------------------------------
+
+backend:
+  name: github
+  repo: VOTRE-COMPTE/VOTRE-DEPOT
+  branch: main
+
+# Les images envoyées depuis l'admin atterrissent ici
+media_folder: images/uploads
+public_folder: images/uploads
+
+# Publie directement, sans étape de relecture
+publish_mode: simple
+
+locale: fr
+
+collections:
+  - name: contenu
+    label: Contenu du site
+    files:
+
+      # ---------------------------------------------- Identité ----
+      - name: site
+        label: Identité, à propos, contact
+        file: content/site.json
+        icon: person
+        fields:
+          - { name: nom, label: Nom affiché, widget: string }
+          - { name: pronom, label: Pronom, widget: string, required: false, hint: "Par exemple (elle). Laissez vide pour ne rien afficher." }
+          - { name: metier, label: Métier, widget: string, hint: "S'affiche sous le nom, dans la colonne de gauche." }
+          - { name: lieu, label: Ville, widget: string }
+          - { name: email, label: Email de contact, widget: string, hint: "Affiché dans la colonne de gauche." }
+          - { name: accroche, label: Phrase d'accroche, widget: text, required: false, hint: "Une seule phrase, en gros caractères en haut de la bio. Laissez vide pour n'en afficher aucune." }
+          - { name: a_propos, label: Texte de présentation, widget: text, hint: "Laissez une ligne vide entre deux paragraphes." }
+          - { name: portrait, label: Portrait, widget: image, required: false }
+          - name: liens
+            label: Liens (Vimeo, réseaux, sites)
+            widget: list
+            required: false
+            label_singular: lien
+            summary: "{{fields.nom}}"
+            fields:
+              - { name: nom, label: Nom affiché, widget: string }
+              - { name: url, label: Adresse, widget: string }
+
+      # ------------------------------------------------- Films ----
+      - name: films
+        label: Films
+        file: content/films.json
+        icon: movie
+        fields:
+          - name: films
+            label: Films
+            widget: list
+            label_singular: film
+            summary: "{{fields.annee}} — {{fields.titre}}"
+            fields:
+              - { name: titre, label: Titre, widget: string }
+              - { name: annee, label: Année, widget: string, required: false }
+              - { name: duree, label: Durée, widget: string, required: false, hint: "Par exemple 11 min 30." }
+              - name: vimeo_id
+                label: Identifiant Vimeo
+                widget: string
+                hint: "Les chiffres à la fin de l'adresse. Pour vimeo.com/1229564164, c'est 1229564164."
+              - name: vignette
+                label: Vignette
+                widget: string
+                required: false
+                hint: "Adresse de l'image d'aperçu Vimeo, ou laissez vide. Pour utiliser votre propre image, voyez le champ suivant."
+              - { name: image, label: Image personnalisée, widget: image, required: false, hint: "Remplace la vignette Vimeo si vous en envoyez une." }
+              - name: description
+                label: Synopsis
+                widget: text
+                required: false
+                hint: "Visible quand on ouvre le film. Une ligne vide sépare deux paragraphes. Pour un lien, écrivez [le texte affiché](https://adresse)."
+              - name: credits
+                label: Crédits
+                widget: text
+                required: false
+                hint: "Une ligne par crédit. Les liens s'écrivent [le texte affiché](https://adresse)."
+
+      # ------------------------------------------------ Textes ----
+      - name: textes
+        label: Textes
+        file: content/textes.json
+        icon: article
+        fields:
+          - name: textes
+            label: Textes
+            widget: list
+            label_singular: texte
+            summary: "{{fields.annee}} — {{fields.titre}}"
+            fields:
+              - { name: titre, label: Titre, widget: string }
+              - { name: annee, label: Année, widget: string, required: false }
+              - { name: precision, label: Précision, widget: string, required: false, hint: "Éditeur, revue, format… S'affiche en petit sous le titre." }
+              - { name: url, label: Lien, widget: string, required: false, hint: "Si vous en mettez un, la ligne devient cliquable." }
+
+      # ---------------------------------------------- Parcours ----
+      - name: cv
+        label: Parcours et compétences
+        file: content/cv.json
+        icon: timeline
+        fields:
+          - name: groupes
+            label: Rubriques
+            widget: list
+            label_singular: rubrique
+            summary: "{{fields.titre}}"
+            hint: "Expériences, Formation, Engagements, Publication… Vous pouvez en ajouter, en renommer ou en réordonner."
+            fields:
+              - { name: titre, label: Titre de la rubrique, widget: string }
+              - name: entrees
+                label: Entrées
+                widget: list
+                label_singular: entrée
+                summary: "{{fields.annee}} — {{fields.titre}}"
+                fields:
+                  - { name: annee, label: Année ou période, widget: string, hint: "Par exemple 2026, ou 2018–2026." }
+                  - { name: titre, label: Intitulé, widget: string }
+                  - { name: lieu, label: Structure, lieu ou précision, widget: string, required: false }
+                  - { name: detail, label: Description, widget: text, required: false }
+                  - name: points
+                    label: Liste à puces
+                    widget: list
+                    required: false
+                    label_singular: ligne
+                    field: { name: texte, label: Ligne, widget: string }
+
+          - name: competences
+            label: Compétences
+            widget: list
+            label_singular: compétence
+            summary: "{{fields.categorie}}"
+            fields:
+              - { name: categorie, label: Catégorie, widget: string, hint: "Logiciels, Image, Langues…" }
+              - { name: detail, label: Détail, widget: string }

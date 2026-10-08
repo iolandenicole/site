@@ -1,0 +1,54 @@
+{
+  "films": [
+    {
+      "titre": "En ronde",
+      "annee": "2026",
+      "duree": "11 min 30",
+      "vimeo_id": "1229564164",
+      "vignette": "https://i.vimeocdn.com/video/2204256792-7c936f6a8f24229c1c2f1a40bed162fee52987e62d972a9140ef5e4ad2f126c8-d_640",
+      "description": "Elles attendent un appel, un résultat, une date d’injection. En ronde enregistre les voix de femmes engagées dans un parcours de fertilité en 2025. Elles racontent ce qui se joue dans leur corps et l’image avance désynchronisée comme strate d’une représentation de l’hallucination, jusqu’à ne plus savoir ce qui vient du corps ou de l’écran. On y traverse un vertige d’échelle : confier à la science une part de soi devenue invisible, microscopique, hors de portée du ressenti. La voix de la réalisatrice vient s’y mêler, assumer sa subjectivité. Le film ne tranche rien, écoute, projette, laisse ressentir.",
+      "credits": "Images, réalisation et montage : Iolande Nicole",
+      "image": "images/uploads/film-porte.jpg"
+    },
+    {
+      "titre": "Défraction",
+      "annee": "2026",
+      "duree": "5 min 39",
+      "vimeo_id": "1227631434",
+      "vignette": "https://i.vimeocdn.com/video/2201898103-a58a00102d7085de07b12a650794f801e25216ea47f8d88a4102be778f3e81a5-d_640",
+      "description": "Le corps désincarné est mis en scène dans des perspectives déjouées par le feedback. Comment se positionner face à la machine ? Le visible est-il voué à une obsolescence programmée ?",
+      "credits": "Chorégraphie & danse : [@noepellencin8](https://www.instagram.com/noepellencin8/)\nSon : Fasme\nMontage et images : Iolande Nicole",
+      "image": "images/uploads/film-uv.jpg"
+    },
+    {
+      "titre": "Réflexions artificielles",
+      "annee": "2026",
+      "duree": "2 min 10",
+      "vimeo_id": "1227645970",
+      "vignette": "https://i.vimeocdn.com/video/2201910395-f769a584b3daf02e0ee0b99452dea76a368b211b45fca41a4f8a00ecc4a7c5b3-d_640",
+      "description": "Loin de nous libérer nos gestes localisent, matérialisent face à ce qui se dérobe.\n\nUn mini film réalisé avec [@noepellencin8](https://www.instagram.com/noepellencin8/) grâce aux infrastructures et matériels de l’École des Beaux-Arts de Marseille.",
+      "credits": "Chorégraphie & danse : [@noepellencin8](https://www.instagram.com/noepellencin8/)\nSon, texte, images : Iolande Nicole",
+      "image": "images/uploads/film-portrait-glitch.jpg"
+    },
+    {
+      "titre": "Perspectives",
+      "annee": "2026",
+      "duree": "2 min 20",
+      "vimeo_id": "1227644469",
+      "vignette": "https://i.vimeocdn.com/video/2201908876-6737c7673eca299c986ec81312c1710357748b246a7890b825ee1c1e21e39a1c-d_640",
+      "description": "",
+      "credits": "Chorégraphie & danse : [@noepellencin8](https://www.instagram.com/noepellencin8/)\nMusique : 3615Sharknado\nImages et montage : Iolande Nicole",
+      "image": "images/uploads/film-disque.jpg"
+    },
+    {
+      "titre": "Axis",
+      "annee": "2026",
+      "duree": "1 min 49",
+      "vimeo_id": "1227643331",
+      "vignette": "https://i.vimeocdn.com/video/2201906279-11368a79bc87417b15dd8e0328e2783cbdfc394e4c8851f528d9b37ec86d7770-d_640",
+      "description": "",
+      "credits": "Chorégraphie & danse : [@noepellencin8](https://www.instagram.com/noepellencin8/)\nImages et montage : Iolande Nicole",
+      "image": "images/uploads/film-baton.jpg"
+    }
+  ]
+}

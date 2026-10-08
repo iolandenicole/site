@@ -1,0 +1,66 @@
+{
+  "groupes": [
+    {
+      "titre": "Expériences",
+      "entrees": [
+        {
+          "annee": "2026",
+          "titre": "Assistante de recherche et documentation — projet VR chorégraphique",
+          "lieu": "Résidence [SCÈNE44](https://scene44.com) / [Corsino](https://www.nncorsino.com/fr/), avec [Guangli Liu](https://www.lefresnoy.net/fr/ecole/etudiant/501/)",
+          "detail": "",
+          "points": []
+        },
+        {
+          "annee": "2026",
+          "titre": "Exposition des diplômés",
+          "lieu": "[Centre Photographique Marseille (CPM)](https://www.centrephotomarseille.fr/)",
+          "detail": "Commissaire d’exposition : [Flora Fettah](https://www.instagram.com/fcftth/?hl=en).",
+          "points": []
+        },
+        {
+          "annee": "2025–2026",
+          "titre": "Réalisation et montage du film documentaire de fin d'étude",
+          "lieu": "« En ronde »",
+          "detail": "Images et réalisation.",
+          "points": []
+        },
+        {
+          "annee": "2025",
+          "titre": "Captation vidéo de conférences et postproduction",
+          "lieu": "[École des Beaux-Arts de Marseille](https://www.esadmm.fr)",
+          "detail": "Captation, montage sur Premiere Pro et sous-titrage des interventions.",
+          "points": []
+        }
+      ]
+    },
+    {
+      "titre": "Formation",
+      "entrees": [
+        {
+          "annee": "2023–2026",
+          "titre": "[Beaux-Arts de Marseille](https://www.esadmm.fr)",
+          "lieu": "Spécialisation : Une fabrique des images",
+          "detail": "Mention pour l'approche de l'écriture.",
+          "points": []
+        },
+        {
+          "annee": "2026",
+          "titre": "Workshop avec [Ana Vaz](https://villamedici.it/en/resident/ana-vaz/)",
+          "lieu": "Février 2026",
+          "detail": "",
+          "points": []
+        }
+      ]
+    }
+  ],
+  "competences": [
+    {
+      "categorie": "Logiciels",
+      "detail": "Adobe Premiere Pro, Premiere Rush, InDesign, Photoshop, XD"
+    },
+    {
+      "categorie": "Image",
+      "detail": "Captation multicaméra, montage, sous-titrage"
+    }
+  ]
+}
