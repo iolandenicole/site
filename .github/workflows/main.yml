@@ -1,0 +1,30 @@
+name: Publier sur OVH
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploiement:
+    name: Envoi des fichiers par FTP
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Récupérer le site
+        uses: actions/checkout@v6
+
+      - name: Envoyer sur OVH
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
+        with:
+          server: ${{ secrets.OVH_FTP_SERVEUR }}
+          username: ${{ secrets.OVH_FTP_UTILISATEUR }}
+          password: ${{ secrets.OVH_FTP_MOTDEPASSE }}
+          protocol: ftps
+          local-dir: ./
+          server-dir: ./www/
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/README.md
+            **/.DS_Store
