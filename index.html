@@ -3,11 +3,99 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Administration du site</title>
-<meta name="robots" content="noindex">
-<link href="config.yml" type="text/yaml" rel="cms-config-url">
+<title>Iolande Nicole — Réalisatrice monteuse productrice</title>
+<meta name="description" content="Poésie documentaire. Films et parcours de Iolande Nicole, basée à Marseille.">
+<meta name="color-scheme" content="dark">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Iolande Nicole — Réalisatrice monteuse productrice">
+<meta property="og:description" content="Poésie documentaire. Films et parcours de Iolande Nicole, basée à Marseille.">
+
+<link rel="preload" href="fonts/lucida-sans-demi.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/minion-pro-regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js" type="module"></script>
+
+<a class="skip" href="#films">Aller au contenu</a>
+
+<header class="topbar">
+  <a class="topbar__name" href="#haut" data-slot="nom">&nbsp;</a>
+  <nav class="nav" aria-label="Sections du site">
+    <a href="#films">Films</a>
+    <a href="#textes">Textes</a>
+    <a href="#bio">Bio</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main id="haut">
+
+  <section class="section" id="films" aria-labelledby="t-films">
+    <div class="section__head section__head--masque">
+      <h2 class="section__title" id="t-films">Films</h2>
+    </div>
+    <ul class="films" data-slot="films">
+      <li class="loading">Chargement des films…</li>
+    </ul>
+  </section>
+
+  <section class="section" id="textes" aria-labelledby="t-textes">
+    <div class="section__head">
+      <h2 class="section__title" id="t-textes">Textes</h2>
+    </div>
+    <ul class="textes" data-slot="textes"></ul>
+  </section>
+
+  <section class="section" id="bio" aria-labelledby="t-bio">
+    <div class="section__head">
+      <h2 class="section__title" id="t-bio">Bio</h2>
+    </div>
+
+    <p class="lede" data-slot="accroche" hidden></p>
+
+    <div class="bio__body">
+      <div class="prose" data-slot="a_propos"></div>
+      <figure class="portrait" data-slot="portrait-figure" hidden>
+        <img data-slot="portrait" alt="" loading="lazy">
+      </figure>
+    </div>
+
+    <div class="cv" data-slot="cv"></div>
+    <div class="skills" data-slot="competences"></div>
+  </section>
+
+</main>
+
+<footer class="footer" id="contact">
+  <p class="footer__nom">
+    <span data-slot="metier-pied"></span>
+    <span class="footer__lieu" data-slot="lieu"></span>
+  </p>
+  <p class="footer__mail">
+    <a data-slot="email-lien" href="#"><span data-slot="email"></span></a>
+  </p>
+  <div class="social" data-slot="liens"></div>
+</footer>
+
+<div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Film en lecture">
+  <div class="lightbox__bar">
+    <button class="lightbox__close" type="button" id="lb-close">Fermer</button>
+  </div>
+  <div class="lightbox__stage" id="lb-stage"></div>
+  <div class="lightbox__foot">
+    <div class="lightbox__caption">
+      <h3 id="lb-titre"></h3>
+      <div class="lightbox__texte" id="lb-texte"></div>
+      <div class="lightbox__credits" id="lb-credits"></div>
+    </div>
+    <div class="lightbox__nav">
+      <button class="lightbox__step" type="button" id="lb-prev">Précédent</button>
+      <button class="lightbox__step" type="button" id="lb-next">Suivant</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/main.js"></script>
 </body>
 </html>

@@ -12,7 +12,7 @@
 
 backend:
   name: github
-  repo: VOTRE-COMPTE/VOTRE-DEPOT
+  repo: iolandenicole/site
   branch: main
 
 # Les images envoyées depuis l'admin atterrissent ici
